@@ -20,6 +20,7 @@ A full-stack web application for managing personal daily tasks with an interacti
   - Bar chart: Priority breakdown (Low / Medium / High)
   - KPI cards: Total active tasks, tasks completed today, overdue tasks
 - **Responsive UI** — Fully responsive layout across mobile, tablet, and desktop screens
+- **Adaptive Burgundy Theme** — Premium Burgundy style supporting both Light Mode (pale pink/white styling) and Dark Mode (deep dark burgundy styling). Toggles seamlessly via interactive switcher buttons, updating styles across all cards, input elements, buttons, and dynamically adjusting Recharts graph axis colors for perfect contrast.
 
 ---
 
@@ -29,7 +30,8 @@ A full-stack web application for managing personal daily tasks with an interacti
 | Tool | Purpose |
 |---|---|
 | React (TypeScript) + Vite | Fast, type-safe UI development |
-| Tailwind CSS | Utility-first responsive styling |
+| Tailwind CSS v4 | Utility-first responsive styling with custom manual dark mode variant configuration |
+| React Context API | Global state management for dark/light mode toggle persistence |
 | React Router DOM | Client-side routing and protected routes |
 | Axios | HTTP client for API communication |
 | Recharts | Pie chart and bar chart visualizations for the analytics dashboard |
