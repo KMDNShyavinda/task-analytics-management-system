@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTasks, createTask } from '../services/taskService';
-import type { Task, TaskFormData } from '../types/Task';
+import { getTasks, createTask, updateTask, deleteTask } from '../services/taskService';
+import type { Task, TaskFormData, Status } from '../types/Task';
 import TaskModal from '../components/TaskModal';
 
 function Dashboard() {
@@ -37,6 +37,27 @@ function Dashboard() {
   const handleCreateTask = async (data: TaskFormData) => {
     await createTask(data);
     await fetchTasks();
+  };
+
+  const handleStatusChange = async (taskId: string, newStatus: Status) => {
+    try {
+      await updateTask(taskId, { status: newStatus });
+      await fetchTasks();
+    } catch (err) {
+      setError('Failed to update task status.');
+    }
+  };
+
+  const handleDelete = async (taskId: string) => {
+    const confirmed = window.confirm('Are you sure you want to delete this task?');
+    if (!confirmed) return;
+
+    try {
+      await deleteTask(taskId);
+      await fetchTasks();
+    } catch (err) {
+      setError('Failed to delete task.');
+    }
   };
 
   return (
@@ -85,13 +106,27 @@ function Dashboard() {
                       Due: {new Date(task.dueDate).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
+                  <div className="flex flex-col items-end gap-2">
                     <span className="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">
                       {task.priority}
                     </span>
-                    <span className="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400">
-                      {task.status}
-                    </span>
+
+                    <select
+                      value={task.status}
+                      onChange={(e) => handleStatusChange(task._id, e.target.value as Status)}
+                      className="text-xs px-2 py-1 rounded bg-slate-700 text-white border border-slate-600"
+                    >
+                      <option value="To Do">To Do</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+
+                    <button
+                      onClick={() => handleDelete(task._id)}
+                      className="text-xs text-red-400 hover:text-red-300 hover:underline"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
