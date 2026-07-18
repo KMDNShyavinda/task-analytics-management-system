@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTasks } from '../services/taskService';
-import type { Task } from '../types/Task';
+import { getTasks, createTask } from '../services/taskService';
+import type { Task, TaskFormData } from '../types/Task';
+import TaskModal from '../components/TaskModal';
 
 function Dashboard() {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const fetchTasks = async () => {
     setLoading(true);
@@ -32,17 +34,30 @@ function Dashboard() {
     navigate('/login');
   };
 
+  const handleCreateTask = async (data: TaskFormData) => {
+    await createTask(data);
+    await fetchTasks();
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-white">My Tasks</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded text-sm"
-          >
-            Logout
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm"
+            >
+              + Add Task
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded text-sm"
+            >
+              Logout
+            </button>
+          </div>
         </div>
 
         {error && (
@@ -84,6 +99,13 @@ function Dashboard() {
           </div>
         )}
       </div>
+
+      {showModal && (
+        <TaskModal
+          onClose={() => setShowModal(false)}
+          onSubmit={handleCreateTask}
+        />
+      )}
     </div>
   );
 }
