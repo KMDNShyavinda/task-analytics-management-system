@@ -4,6 +4,10 @@ A full-stack web application for managing personal daily tasks with an interacti
 
 **Repository:** https://github.com/KMDNShyavinda/task-analytics-management-system
 
+**Live Demo:**
+- Frontend: https://task-analytics-management-system.vercel.app
+- Backend API: https://task-analytics-management-system-production.up.railway.app
+
 ---
 
 ## Features
@@ -199,6 +203,15 @@ Protected endpoints require an `Authorization: Bearer <token>` header.
 | `JWT_SECRET` | `backend/.env` | Secret key used to sign and verify JWT tokens |
 
 `.env` is excluded from version control via `.gitignore` and must be created manually by anyone running this project locally.
+
+---
+
+## Deployment
+
+- **Frontend** is deployed on **Vercel**, built from the `frontend` directory with the `VITE_API_URL` environment variable pointing to the live backend.
+- **Backend** is deployed on **Railway**, built from the `backend` directory. Environment variables (`MONGO_URI`, `JWT_SECRET`, `PORT`) are configured directly in the Railway dashboard.
+- CORS on the backend is restricted to the specific frontend origins (`localhost:5173` for local development and the deployed Vercel URL) rather than left open to all origins.
+- MongoDB Atlas network access is configured to allow connections from anywhere (`0.0.0.0/0`), since Railway's outbound IPs are not static on the free tier.
 
 ---
 
