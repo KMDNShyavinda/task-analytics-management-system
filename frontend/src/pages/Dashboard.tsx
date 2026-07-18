@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getTasks, createTask, updateTask, deleteTask } from '../services/taskService';
 import type { Task, TaskFormData, Status } from '../types/Task';
 import TaskModal from '../components/TaskModal';
+import Analytics from '../components/Analytics';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -61,8 +62,9 @@ function Dashboard() {
   };
 
   return (
+    
     <div className="min-h-screen bg-slate-900 px-4 py-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto"> <Analytics />
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-white">My Tasks</h1>
           <div className="flex gap-2">
