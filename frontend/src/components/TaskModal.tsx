@@ -32,8 +32,8 @@ function TaskModal({ onClose, onSubmit }: TaskModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center px-4 z-50">
-      <div className="bg-white p-6 rounded-lg border border-[#7F1D1D]/10 w-full max-w-md">
-        <h2 className="text-xl font-bold text-[#1F2937] mb-4">Create New Task</h2>
+      <div className="bg-white dark:bg-[#2D1212] p-6 rounded-lg border border-[#7F1D1D]/10 dark:border-[#7F1D1D]/30 w-full max-w-md transition-all duration-200">
+        <h2 className="text-xl font-bold text-[#1F2937] dark:text-[#FEF2F2] mb-4">Create New Task</h2>
 
         {error && (
           <div className="bg-[#DC2626]/10 border border-[#DC2626] text-[#DC2626] px-3 py-2 rounded mb-3 text-sm">
@@ -43,44 +43,44 @@ function TaskModal({ onClose, onSubmit }: TaskModalProps) {
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label className="block text-[#1F2937]/60 text-sm mb-1">Title</label>
+            <label className="block text-[#1F2937]/60 dark:text-[#FEF2F2]/60 text-sm mb-1">Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded bg-[#FEF2F2] text-[#1F2937] border border-[#7F1D1D]/20 focus:outline-none focus:border-[#7F1D1D]"
+              className="w-full px-3 py-2 rounded bg-[#FEF2F2] dark:bg-[#1C0808] text-[#1F2937] dark:text-[#FEF2F2] border border-[#7F1D1D]/20 dark:border-[#7F1D1D]/40 focus:outline-none focus:border-[#7F1D1D] dark:focus:border-[#DC2626] transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-[#1F2937]/60 text-sm mb-1">Description</label>
+            <label className="block text-[#1F2937]/60 dark:text-[#FEF2F2]/60 text-sm mb-1">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full px-3 py-2 rounded bg-[#FEF2F2] text-[#1F2937] border border-[#7F1D1D]/20 focus:outline-none focus:border-[#7F1D1D]"
+              className="w-full px-3 py-2 rounded bg-[#FEF2F2] dark:bg-[#1C0808] text-[#1F2937] dark:text-[#FEF2F2] border border-[#7F1D1D]/20 dark:border-[#7F1D1D]/40 focus:outline-none focus:border-[#7F1D1D] dark:focus:border-[#DC2626] transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-[#1F2937]/60 text-sm mb-1">Due Date</label>
+            <label className="block text-[#1F2937]/60 dark:text-[#FEF2F2]/60 text-sm mb-1">Due Date</label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
               required
-              className="w-full px-3 py-2 rounded bg-[#FEF2F2] text-[#1F2937] border border-[#7F1D1D]/20 focus:outline-none focus:border-[#7F1D1D]"
+              className="w-full px-3 py-2 rounded bg-[#FEF2F2] dark:bg-[#1C0808] text-[#1F2937] dark:text-[#FEF2F2] border border-[#7F1D1D]/20 dark:border-[#7F1D1D]/40 focus:outline-none focus:border-[#7F1D1D] dark:focus:border-[#DC2626] transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[#1F2937]/60 text-sm mb-1">Priority</label>
+              <label className="block text-[#1F2937]/60 dark:text-[#FEF2F2]/60 text-sm mb-1">Priority</label>
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value as Priority)}
-                className="w-full px-3 py-2 rounded bg-[#FEF2F2] text-[#1F2937] border border-[#7F1D1D]/20 focus:outline-none focus:border-[#7F1D1D]"
+                className="w-full px-3 py-2 rounded bg-[#FEF2F2] dark:bg-[#1C0808] text-[#1F2937] dark:text-[#FEF2F2] border border-[#7F1D1D]/20 dark:border-[#7F1D1D]/40 focus:outline-none focus:border-[#7F1D1D] dark:focus:border-[#DC2626] transition-colors"
               >
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
@@ -89,11 +89,11 @@ function TaskModal({ onClose, onSubmit }: TaskModalProps) {
             </div>
 
             <div>
-              <label className="block text-[#1F2937]/60 text-sm mb-1">Status</label>
+              <label className="block text-[#1F2937]/60 dark:text-[#FEF2F2]/60 text-sm mb-1">Status</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as Status)}
-                className="w-full px-3 py-2 rounded bg-[#FEF2F2] text-[#1F2937] border border-[#7F1D1D]/20 focus:outline-none focus:border-[#7F1D1D]"
+                className="w-full px-3 py-2 rounded bg-[#FEF2F2] dark:bg-[#1C0808] text-[#1F2937] dark:text-[#FEF2F2] border border-[#7F1D1D]/20 dark:border-[#7F1D1D]/40 focus:outline-none focus:border-[#7F1D1D] dark:focus:border-[#DC2626] transition-colors"
               >
                 <option value="To Do">To Do</option>
                 <option value="In Progress">In Progress</option>
@@ -106,7 +106,7 @@ function TaskModal({ onClose, onSubmit }: TaskModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-white hover:bg-[#7F1D1D]/10 border border-[#7F1D1D]/20 text-[#1F2937] py-2 rounded"
+              className="flex-1 bg-white dark:bg-[#2D1212] hover:bg-[#7F1D1D]/10 dark:hover:bg-[#7F1D1D]/20 border border-[#7F1D1D]/20 dark:border-[#7F1D1D]/40 text-[#1F2937] dark:text-[#FEF2F2] py-2 rounded transition-colors"
             >
               Cancel
             </button>
