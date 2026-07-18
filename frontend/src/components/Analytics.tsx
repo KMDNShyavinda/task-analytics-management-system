@@ -9,7 +9,11 @@ import type { AnalyticsSummary } from '../services/analyticsService';
 const STATUS_COLORS = ['#f59e0b', '#3b82f6', '#22c55e'];
 const PRIORITY_COLORS = { Low: '#22c55e', Medium: '#f59e0b', High: '#ef4444' };
 
-function Analytics() {
+interface AnalyticsProps {
+  refreshTrigger: number;
+}
+
+function Analytics({ refreshTrigger }: AnalyticsProps) {
   const [data, setData] = useState<AnalyticsSummary | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +29,7 @@ function Analytics() {
       }
     };
     fetchAnalytics();
-  }, []);
+  }, [refreshTrigger]);
 
   if (loading) {
     return <p className="text-slate-400">Loading analytics...</p>;

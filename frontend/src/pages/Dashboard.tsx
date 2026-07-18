@@ -11,6 +11,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const fetchTasks = async () => {
     setLoading(true);
@@ -38,12 +39,14 @@ function Dashboard() {
   const handleCreateTask = async (data: TaskFormData) => {
     await createTask(data);
     await fetchTasks();
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   const handleStatusChange = async (taskId: string, newStatus: Status) => {
     try {
       await updateTask(taskId, { status: newStatus });
       await fetchTasks();
+      setRefreshTrigger((prev) => prev + 1);
     } catch (err) {
       setError('Failed to update task status.');
     }
@@ -56,15 +59,17 @@ function Dashboard() {
     try {
       await deleteTask(taskId);
       await fetchTasks();
+      setRefreshTrigger((prev) => prev + 1);
     } catch (err) {
       setError('Failed to delete task.');
     }
   };
 
   return (
-    
     <div className="min-h-screen bg-slate-900 px-4 py-8">
-      <div className="max-w-4xl mx-auto"> <Analytics />
+      <div className="max-w-4xl mx-auto">
+        <Analytics refreshTrigger={refreshTrigger} />
+
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-white">My Tasks</h1>
           <div className="flex gap-2">
